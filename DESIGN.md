@@ -1,29 +1,38 @@
-# Finance Tracker: Design
+# Pocket Ledger: Design
 
 ## Data model
 
-
+- Store whole cents as integers, avoids rounding errors from decial numbers
 
 ### users
-- id
-- email
-- password_hash
+| Column | Type | Notes |
+|---|---|---|
+| id | integer | primary key |
+| email | text | unique: no two users share one |
+| password_hash | text | |
+
 
 ### accounts
-- account holder
-- type
-- name
-- balance
-- credit limit for cards
+
+| Column | Type | Notes |
+|---|---|---|
+| user_id | integer | primary key |
+| type | text | |
+| name | text | |
+|starting_balance | integer | |
+| current_balance | integer | |
+| credit | integer | limit for available funds |
 
 ### transactions
-- which account
-- amount
-- the date
-- category
-- description
-- deposit or widthdrawl
-- transfer between accounts
+
+| Column | Type | Notes |
+|---|---|---|
+| account_id|integer|primary key|
+| cost | integer ||
+| date | DATE||
+|categroty| text ||
+
+
 
 
 ## API
@@ -39,9 +48,10 @@
 | PATCH |/api/transactions/:id | edit one |
 | DELETE |/api/transactions/:id | delete one |
 | POST |/api/auth/signup | create user account |
-| GET |/api/auth/login | log into existing account
-| DELETE |/api/auth/delete | delete exsiting account |
-| PATCH |/api/auth/edit | edit existing account details |
+| POST |/api/auth/login | log into existing account |
+| POST |/api/auth/logout | log out of account |
+| DELETE |/api/me/ | delete exisiting account |
+| PATCH |/api/me | edit existing account details |
 
 ## Pages
 
@@ -60,7 +70,7 @@
 |---|---|---|        
 | Bank | Wells Fargo | $00.00 |
 
-    - Store whole cents as integers
+    
 - **Later**: 
 
     - **Bills & Income**:
@@ -78,3 +88,4 @@
                 - Saving Plan for xyz purpose
     - customization
         - color, theme, fonts
+    - transfer between accounts
