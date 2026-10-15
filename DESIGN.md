@@ -2,7 +2,7 @@
 
 ## Data model
 
-- Store whole cents as integers, avoids rounding errors from decial numbers
+- Store whole cents as integers, avoids rounding errors from decimal numbers
 
 ### users
 | Column | Type | Notes |
@@ -16,21 +16,23 @@
 
 | Column | Type | Notes |
 |---|---|---|
-| user_id | integer | primary key |
+| id | integer | primary key |
+| user_id | integer | foreign key -> users.id |
 | type | text | |
 | name | text | |
-|starting_balance | integer | |
-| current_balance | integer | |
-| credit | integer | limit for available funds |
+| starting_balance | integer | |
+| credit_limit | integer | limit for available funds |
 
 ### transactions
 
 | Column | Type | Notes |
 |---|---|---|
-| account_id|integer|primary key|
-| cost | integer ||
-| date | DATE||
-|categroty| text ||
+| id | integer | primary key|
+| account_id|integer| foreign key -> accounts.id|
+| amount | integer ||
+| date | date ||
+| category| text ||
+| description | text ||
 
 
 
@@ -50,8 +52,8 @@
 | POST |/api/auth/signup | create user account |
 | POST |/api/auth/login | log into existing account |
 | POST |/api/auth/logout | log out of account |
-| DELETE |/api/me/ | delete exisiting account |
-| PATCH |/api/me | edit existing account details |
+| DELETE |/api/me/ | delete existing account |
+| PATCH |/api/me/ | edit existing account details |
 
 ## Pages
 
